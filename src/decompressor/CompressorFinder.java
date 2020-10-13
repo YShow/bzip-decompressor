@@ -1,5 +1,7 @@
 package decompressor;
 
+import static java.util.function.Predicate.not;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -50,7 +52,7 @@ public final class CompressorFinder {
 		return files.computeIfAbsent(BZip2Utils.getUncompressedFilename(path.getFileName().toString()), k -> {
 			System.out.println("new file added to the map: " + k);
 			try(final var fileStream = Files.list(DECOMPRESSEDFILESLOCATION)) {
-				if(fileStream.filter(e -> e.getFileName().toString().equals(k) ).findFirst().isEmpty()) {
+				if(fileStream.noneMatch(e -> e.getFileName().toString().equals(k))) {
 				DecompressorUtil.decompress(path, DECOMPRESSEDFILESLOCATION,k);
 				}
 			} catch (IOException e) {
