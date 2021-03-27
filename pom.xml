@@ -13,6 +13,11 @@
 				<version>3.8.1</version>
 				<configuration>
 					<release>11</release>
+					<showWarnings>true</showWarnings>
+					<failOnWarning>false</failOnWarning>
+					<compilerArgs>
+						<arg>-Xlint:all</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -22,8 +27,8 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
+<!-- 							<addClasspath>true</addClasspath> -->
+<!-- 							<classpathPrefix>lib/</classpathPrefix> -->
 							<mainClass>decompressor.CompressorFinder</mainClass>
 						</manifest>
 					</archive>
@@ -42,10 +47,7 @@
 						</goals>
 						<configuration>
 							<outputDirectory>${project.build.directory}/lib</outputDirectory>
-							<overWriteReleases>false</overWriteReleases>
-							<overWriteSnapshots>false</overWriteSnapshots>
 							<overWriteIfNewer>true</overWriteIfNewer>
-							<excludeTransitive>true</excludeTransitive>
 						</configuration>
 					</execution>
 				</executions>
