@@ -2,7 +2,6 @@ package decompressor;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
