@@ -33,7 +33,15 @@ public final class DecompressorUtil {
 			CompressorFinder.LOGGER.log(Level.INFO, () -> "File: " + filename + " was extracted to: " + pathToDecompressTo);
 			
 		} catch (IOException | CompressorException e) {
-			CompressorFinder.LOGGER.log(Level.SEVERE, e, e::getMessage);
+			try {
+				if(Files.deleteIfExists(finalPath))
+				{
+					CompressorFinder.LOGGER.log(Level.WARNING,() -> "File: " + finalPath + " was deleted because of a error");
+				}
+			} catch (IOException e1) {
+				CompressorFinder.LOGGER.log(Level.SEVERE, e1, e1::getMessage);
+			}
+			CompressorFinder.LOGGER.log(Level.SEVERE, e, e::getMessage);			
 		}
 	}
 }

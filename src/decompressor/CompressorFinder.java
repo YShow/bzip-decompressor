@@ -14,20 +14,18 @@ public final class CompressorFinder {
 	private static final Path COMPRESSEDFILESLOCATION = Path.of(System.getProperty("compressor", "./"));
 	private static final Path DECOMPRESSEDFILESLOCATION = Path.of(System.getProperty("decompressor", "./"));
 
-	//
 	public static void main(final String[] args) {
-		LOGGER.log(Level.INFO,"Path to compressed files: " + COMPRESSEDFILESLOCATION);
-		LOGGER.log(Level.INFO,"Path to decompress files: " + DECOMPRESSEDFILESLOCATION);
+		LOGGER.log(Level.INFO,() -> "Path to compressed files: " + COMPRESSEDFILESLOCATION);
+		LOGGER.log(Level.INFO,() ->"Path to decompress files: " + DECOMPRESSEDFILESLOCATION);
 		checkNewItems(COMPRESSEDFILESLOCATION);
-		LOGGER.log(Level.WARNING, "Done decompressing files");
+		LOGGER.log(Level.WARNING,() -> "Done decompressing files");
 		
 	}
 
 	private static final void checkNewItems(final Path pathToItems) {
 		try (final var file = Files.newDirectoryStream(pathToItems, "*.bz2")) {
-			file.forEach(path -> computeNewFile(path));
+			file.forEach(CompressorFinder::computeNewFile);
 		} catch (IOException e) {
-			// SHOULD NEVER REACH HERE
 			LOGGER.log(Level.SEVERE, e, e::getMessage);
 		}
 	}
